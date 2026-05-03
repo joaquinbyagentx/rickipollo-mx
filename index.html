@@ -1052,6 +1052,128 @@
       margin: 0 auto 16px;
       opacity: 0.6;
     }
+
+    /* ============================================================
+       BLOQUE HISTORIA EN ACOMPAÑANTES
+    ============================================================ */
+    .heritage-card {
+      margin: 0 auto 54px;
+      background: var(--blanco);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(30, 30, 30, 0.14);
+      display: grid;
+      grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
+      border: 1px solid rgba(30, 30, 30, 0.06);
+    }
+
+    .heritage-image {
+      position: relative;
+      min-height: 380px;
+      background: var(--negro);
+      overflow: hidden;
+    }
+
+    .heritage-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: contrast(1.05) saturate(0.9);
+      transform: scale(1.01);
+    }
+
+    .heritage-badge {
+      position: absolute;
+      left: 22px;
+      bottom: 22px;
+      background: rgba(30, 30, 30, 0.88);
+      color: var(--blanco);
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .heritage-content {
+      padding: clamp(32px, 5vw, 58px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+    }
+
+    .heritage-kicker {
+      color: var(--naranja);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+    }
+
+    .heritage-title {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 0.98;
+      color: var(--negro);
+      margin-bottom: 22px;
+    }
+
+    .heritage-title em {
+      color: var(--naranja);
+      font-style: italic;
+    }
+
+    .heritage-copy {
+      color: #5f554d;
+      font-size: 1.05rem;
+      line-height: 1.82;
+      display: grid;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .heritage-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .heritage-point {
+      background: var(--crema);
+      border-radius: 18px;
+      padding: 18px 16px;
+      border: 1px solid rgba(217, 106, 27, 0.12);
+    }
+
+    .heritage-point strong {
+      display: block;
+      color: var(--negro);
+      font-size: 0.92rem;
+      margin-bottom: 5px;
+    }
+
+    .heritage-point span {
+      color: #5f554d;
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 900px) {
+      .heritage-card {
+        grid-template-columns: 1fr;
+      }
+      .heritage-image {
+        min-height: 300px;
+      }
+      .heritage-points {
+        grid-template-columns: 1fr;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1225,6 +1347,27 @@
         </p>
       </div>
 
+      <div class="heritage-card fade-in">
+        <div class="heritage-image">
+          <img src="img/historia-horno-tabique-lena.png" alt="Horno de tabique a leña de Ricki Pollo" onerror="this.style.display='none'" />
+          <div class="heritage-badge">Cocción tradicional</div>
+        </div>
+        <div class="heritage-content">
+          <div class="heritage-kicker">Historia familiar</div>
+          <h2 class="heritage-title">80 años de oficio,<br /><em>pasión al sabor</em></h2>
+          <div class="heritage-copy">
+            <p>Antes de servir el primer plato, ya existía una forma de cocinar: con calma, con detalle y con respeto por el fuego.</p>
+            <p>En Ricki Pollo honramos esa tradición de más de 80 años llevando cada pollo al horno de tabique a leña, donde el calor envuelve la carne lentamente hasta dejarla jugosa, dorada y llena de sabor.</p>
+            <p>Por eso nuestros acompañantes no son un extra cualquiera: completan una mesa pensada para reunirse, compartir y disfrutar como en casa.</p>
+          </div>
+          <div class="heritage-points">
+            <div class="heritage-point"><strong>Horno de tabique</strong><span>Cocción lenta con leña y calor parejo.</span></div>
+            <div class="heritage-point"><strong>Sazón familiar</strong><span>Pasión por el sabor y el detalle.</span></div>
+            <div class="heritage-point"><strong>Mesa completa</strong><span>Pollo y acompañantes para compartir.</span></div>
+          </div>
+        </div>
+      </div>
+
       <div class="garnish-grid">
         <div class="garnish-card fade-in">
           <div class="garnish-emoji">🥔</div>
@@ -1376,15 +1519,13 @@
         </div>
 
         <div class="footer-col">
-          <div class="footer-col-title">Menú</div>
+          <div class="footer-col-title">Explorar</div>
           <ul>
-            <li><a href="menu.html">Pollo Rostizado — $299</a></li>
-            <li><a href="menu.html">Paquete Ejecutivo — $205</a></li>
-            <li><a href="menu.html">Paquete Familiar — $415</a></li>
-            <li><a href="menu.html">Pollo Adobado — $310</a></li>
+            <li><a href="menu.html">Menú completo</a></li>
             <li><a href="#complementos">Complementos</a></li>
-            <li><a href="#guarniciones">Guarniciones</a></li>
-            <li><a href="#guarniciones">Salsas</a></li>
+            <li><a href="#guarniciones">Acompañantes</a></li>
+            <li><a href="#nosotros">Nuestra historia</a></li>
+            <li><a href="#ubicacion">Ubicación</a></li>
           </ul>
         </div>
 
@@ -1506,6 +1647,18 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
     fadeEls.forEach(el => observer.observe(el));
+
+    // Ensure anchor-loaded sections are visible immediately in browsers/headless QA.
+    const revealVisibleFadeEls = () => {
+      fadeEls.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('visible');
+        }
+      });
+    };
+    window.addEventListener('load', () => requestAnimationFrame(revealVisibleFadeEls));
+    window.addEventListener('hashchange', () => requestAnimationFrame(revealVisibleFadeEls));
   </script>
 
 </body>
