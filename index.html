@@ -77,6 +77,8 @@
     #navbar {
       position: fixed;
       top: 0; left: 0; right: 0;
+      width: 100%;
+      max-width: 100vw;
       z-index: 1000;
       padding: 0 clamp(20px, 5vw, 60px);
       height: 72px;
@@ -152,6 +154,7 @@
     .hamburger {
       display: none;
       align-items: center;
+      flex-shrink: 0;
       gap: 10px;
       cursor: pointer;
       padding: 10px 14px;
@@ -194,6 +197,7 @@
 
     /* Mobile nav */
     @media (max-width: 768px) {
+      #navbar { padding: 0 16px; }
       .hamburger { display: inline-flex; }
       .nav-links {
         display: none;
@@ -208,6 +212,14 @@
       .nav-links.open { display: flex; }
       .nav-links a { font-size: 1rem; }
       .btn-wa-nav { text-align: center; width: 100%; display: block; }
+    }
+
+    @media (max-width: 480px) {
+      #navbar { padding: 0 14px; }
+      .nav-logo { font-size: 1.25rem; letter-spacing: 0.06em; }
+      .hamburger { padding: 8px 10px; min-height: 42px; gap: 0; font-size: 0.72rem; }
+      .hamburger-label { display: none; }
+      .hamburger-line { width: 22px; height: 2px; }
     }
 
     /* ============================================================
@@ -255,10 +267,13 @@
       text-align: center;
       color: var(--crema);
       padding: 0 20px;
+      width: 100%;
       max-width: 820px;
+      overflow-wrap: break-word;
     }
     .hero-eyebrow {
       display: inline-block;
+      max-width: 100%;
       font-family: var(--font-body);
       font-size: 0.8rem;
       font-weight: 700;
@@ -297,8 +312,30 @@
       gap: 16px;
       justify-content: center;
       flex-wrap: wrap;
+      max-width: min(100%, 720px);
+      margin: 0 auto;
       opacity: 0;
       animation: heroFadeUp 1s ease 0.95s forwards;
+    }
+    @media (max-width: 640px) {
+      .hero-content { padding: 0 18px; max-width: 100vw; }
+      .hero-eyebrow { letter-spacing: 0.16em; line-height: 1.5; }
+      .hero-tagline { max-width: 100%; }
+      .hero-ctas {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        width: min(100%, 320px);
+      }
+      .hero-ctas .btn-primary,
+      .hero-ctas .btn-outline {
+        width: 100%;
+        justify-content: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        white-space: normal;
+        text-align: center;
+      }
     }
 
     @keyframes heroFadeUp {
@@ -1184,17 +1221,17 @@
   <nav id="navbar">
     <a href="#hero" class="nav-logo">RICKI <span>POLLO</span></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="menu.html">Menú</a></li>
+      <li><a href="https://byagentx.com/menu/rickipollo/">Menú</a></li>
       <li><a href="#complementos" data-section="complementos">Complementos</a></li>
       <li><a href="#nosotros" data-section="nosotros">Nosotros</a></li>
       <li><a href="#ubicacion" data-section="ubicacion">Ubicación</a></li>
       <li>
         <a
-          href="https://wa.me/5212711328513?text=Hola%20Ricki%20Pollo%2C%20quiero%20ordenar"
+          href="https://byagentx.com/menu/rickipollo/"
           target="_blank"
           rel="noopener"
           class="btn-wa-nav"
-        >Ordenar por WhatsApp</a>
+        >Ordenar en línea</a>
       </li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
@@ -1224,15 +1261,15 @@
       </p>
       <div class="hero-ctas">
         <a
-          href="https://wa.me/5212711328513?text=Hola%20Ricki%20Pollo%2C%20quiero%20ordenar"
+          href="https://byagentx.com/menu/rickipollo/"
           target="_blank"
           rel="noopener"
           class="btn-primary"
         >
           <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          Ordenar Ahora
+          Ordenar ahora
         </a>
-        <a href="menu.html" class="btn-outline">Ver Menú Completo</a>
+        <a href="https://byagentx.com/menu/rickipollo/" class="btn-outline">Ver menú de domicilio</a>
       </div>
     </div>
     <div class="hero-scroll-indicator">
@@ -1460,9 +1497,9 @@
           </div>
 
           <div class="info-block">
-            <div class="info-block-label">📞 Teléfono / WhatsApp</div>
+            <div class="info-block-label">📞 Teléfono</div>
             <div class="info-block-value">
-              <a href="https://wa.me/5212711328513?text=Hola%20Ricki%20Pollo%2C%20quiero%20ordenar" target="_blank" rel="noopener">
+              <a href="tel:+522711328513">
                 +52 271 132 8513
               </a>
             </div>
@@ -1512,7 +1549,7 @@
             <a href="https://www.facebook.com/ricki.pollo" target="_blank" rel="noopener" class="social-link" aria-label="Facebook">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
-            <a href="https://wa.me/5212711328513?text=Hola%20Ricki%20Pollo%2C%20quiero%20ordenar" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+            <a href="https://byagentx.com/menu/rickipollo/" target="_blank" rel="noopener" class="social-link" aria-label="Menú de domicilio">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
             </a>
           </div>
@@ -1521,7 +1558,7 @@
         <div class="footer-col">
           <div class="footer-col-title">Explorar</div>
           <ul>
-            <li><a href="menu.html">Menú completo</a></li>
+            <li><a href="https://byagentx.com/menu/rickipollo/">Menú completo</a></li>
             <li><a href="#complementos">Complementos</a></li>
             <li><a href="#guarniciones">Acompañantes</a></li>
             <li><a href="#nosotros">Nuestra historia</a></li>
@@ -1532,7 +1569,7 @@
         <div class="footer-col">
           <div class="footer-col-title">Contacto</div>
           <ul>
-            <li><a href="https://wa.me/5212711328513?text=Hola%20Ricki%20Pollo%2C%20quiero%20ordenar" target="_blank" rel="noopener">Ordenar por WhatsApp</a></li>
+            <li><a href="https://byagentx.com/menu/rickipollo/" target="_blank" rel="noopener">Ordenar en línea</a></li>
             <li><a href="https://share.google/chdhJgTl7wscijLII" target="_blank" rel="noopener">Plaza La Recta</a></li>
             <li><a href="https://share.google/chdhJgTl7wscijLII" target="_blank" rel="noopener">Abrir en Google Maps</a></li>
             <li><a href="#ubicacion">Horario: 12:00 PM – 7:00 PM</a></li>
@@ -1546,7 +1583,7 @@
           &copy; 2024 <span>Ricki Pollo</span> — Rostizados a la Leña. Todos los derechos reservados.
         </div>
         <div class="footer-copy">
-          Hecho con 🔥 en Cholula, Puebla
+          Hecho con 🔥 en Cholula, Puebla · Powered by <a href="https://byagentx.com" target="_blank" rel="noopener"><span>byagentx.com</span></a>
         </div>
       </div>
     </div>
@@ -1556,13 +1593,13 @@
        WHATSAPP FAB
   ============================================================ -->
   <a
-    href="https://wa.me/5212711328513?text=Hola%20Ricki%20Pollo%2C%20quiero%20ordenar"
+    href="https://byagentx.com/menu/rickipollo/"
     target="_blank"
     rel="noopener"
     class="wa-fab"
-    aria-label="Ordenar por WhatsApp"
+    aria-label="Ver menú de domicilio"
   >
-    <div class="wa-fab-tooltip">¡Ordena por WhatsApp!</div>
+    <div class="wa-fab-tooltip">Ver menú de domicilio</div>
     <svg viewBox="0 0 24 24" fill="white" width="30" height="30"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
   </a>
 
