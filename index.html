@@ -151,21 +151,50 @@
 
     .hamburger {
       display: none;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 10px 14px;
+      min-height: 46px;
+      border: 1px solid rgba(217,106,27,0.7);
+      border-radius: 999px;
+      background: rgba(20,20,20,0.86);
+      color: var(--crema);
+      box-shadow: 0 8px 26px rgba(0,0,0,0.28);
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .hamburger:hover,
+    .hamburger:focus-visible {
+      background: rgba(30,30,30,0.96);
+      border-color: var(--naranja);
+      transform: translateY(-1px);
+      outline: none;
+    }
+    .hamburger-icon {
+      display: flex;
       flex-direction: column;
       gap: 5px;
-      cursor: pointer;
-      padding: 4px;
     }
-    .hamburger span {
-      width: 26px; height: 2px;
-      background: var(--crema);
-      border-radius: 2px;
+    .hamburger-line {
+      width: 28px;
+      height: 3px;
+      background: var(--naranja);
+      border-radius: 999px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08);
       transition: var(--transition);
+    }
+    .hamburger-label {
+      line-height: 1;
     }
 
     /* Mobile nav */
     @media (max-width: 768px) {
-      .hamburger { display: flex; }
+      .hamburger { display: inline-flex; }
       .nav-links {
         display: none;
         position: fixed;
@@ -1046,8 +1075,13 @@
         >Ordenar por WhatsApp</a>
       </li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menú">
-      <span></span><span></span><span></span>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false">
+      <span class="hamburger-icon" aria-hidden="true">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </span>
+      <span class="hamburger-label">Menú</span>
     </button>
   </nav>
 
@@ -1975,8 +2009,9 @@
           <div class="info-block">
             <div class="info-block-label">📍 Dirección</div>
             <div class="info-block-value">
-              Calzada Zavaleta 1000<br />
-              Cholula, Puebla
+              Plaza La Recta<br />
+              Cholula, Puebla<br />
+              <a href="https://share.google/chdhJgTl7wscijLII" target="_blank" rel="noopener">Abrir ubicación en Google Maps</a>
             </div>
           </div>
 
@@ -1985,12 +2020,8 @@
             <div class="info-block-value">
               <table class="horarios-table">
                 <tr>
-                  <td>Lunes – Jueves</td>
-                  <td>12:00 PM – 8:00 PM</td>
-                </tr>
-                <tr>
-                  <td>Viernes – Domingo</td>
-                  <td>11:00 AM – 8:00 PM</td>
+                  <td>Todos los días</td>
+                  <td>12:00 PM – 7:00 PM</td>
                 </tr>
               </table>
             </div>
@@ -2017,11 +2048,11 @@
 
         <div class="map-wrap fade-in fade-in-delay-2">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.4!2d-98.3031!3d19.0579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfc7bfe4b4b4b1%3A0x1!2sCalzada+Zavaleta+1000%2C+Cholula%2C+Puebla!5e0!3m2!1ses!2smx!4v1700000000000!5m2!1ses!2smx"
+            src="https://www.google.com/maps?q=Plaza%20La%20Recta%2C%20Cholula%2C%20Puebla&output=embed"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            title="Ubicación Ricki Pollo"
+            title="Ubicación Ricki Pollo en Plaza La Recta"
           ></iframe>
         </div>
       </div>
@@ -2072,9 +2103,9 @@
           <div class="footer-col-title">Contacto</div>
           <ul>
             <li><a href="https://wa.me/5212711328513?text=Hola%20Ricki%20Pollo%2C%20quiero%20ordenar" target="_blank" rel="noopener">Ordenar por WhatsApp</a></li>
-            <li><a href="#ubicacion">Calzada Zavaleta 1000</a></li>
-            <li><a href="#ubicacion">Cholula, Puebla</a></li>
-            <li><a href="#nosotros">Nuestra Historia</a></li>
+            <li><a href="https://share.google/chdhJgTl7wscijLII" target="_blank" rel="noopener">Plaza La Recta</a></li>
+            <li><a href="https://share.google/chdhJgTl7wscijLII" target="_blank" rel="noopener">Abrir en Google Maps</a></li>
+            <li><a href="#ubicacion">Horario: 12:00 PM – 7:00 PM</a></li>
           </ul>
         </div>
       </div>
@@ -2161,11 +2192,17 @@
     const hamburger = document.getElementById('hamburger');
     const navLinksContainer = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => {
-      navLinksContainer.classList.toggle('open');
+      const isOpen = navLinksContainer.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      hamburger.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
     });
     // Close mobile menu on link click
     navLinksContainer.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinksContainer.classList.remove('open'));
+      link.addEventListener('click', () => {
+        navLinksContainer.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Abrir menú');
+      });
     });
 
     // ── Intersection Observer (fade-in) ────────────────────────
