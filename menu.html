@@ -3,32 +3,136 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redirigiendo al menú de Ricki Pollo</title>
-  <meta name="robots" content="noindex, follow" />
-  <link rel="canonical" href="https://byagentx.com/menu/rickipollo/" />
-  <meta http-equiv="refresh" content="0; url=https://byagentx.com/menu/rickipollo/" />
+  <title>Menú de domicilio — Ricki Pollo</title>
+  <meta name="description" content="Menú de domicilio de Ricki Pollo en Cholula, Puebla." />
+  <link rel="canonical" href="https://rickipollo.mx/menu.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet" />
   <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f4f0e8;
-      color: #1e1e1e;
-      text-align: center;
-      padding: 24px;
+    :root {
+      --negro: #1e1e1e;
+      --crema: #f4f0e8;
+      --naranja: #d96a1b;
+      --naranja-dark: #b4532a;
+      --blanco: #ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.12);
     }
-    a { color: #d96a1b; font-weight: 800; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--crema);
+      color: var(--negro);
+    }
+    #navbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(18px, 5vw, 64px);
+      background: rgba(30,30,30,0.97);
+      box-shadow: var(--shadow);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.35rem, 4vw, 2rem);
+      font-weight: 900;
+      color: var(--blanco);
+      text-decoration: none;
+      letter-spacing: -0.04em;
+    }
+    .nav-logo span { color: var(--naranja); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      color: var(--crema);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.92rem;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover { color: var(--naranja); }
+    .btn-wa-nav {
+      background: var(--naranja);
+      color: var(--blanco) !important;
+      padding: 11px 18px;
+      border-radius: 999px;
+      box-shadow: 0 8px 18px rgba(217,106,27,.28);
+    }
+    .menu-shell {
+      min-height: calc(100vh - 78px);
+      display: flex;
+      flex-direction: column;
+    }
+    .menu-frame-wrap {
+      flex: 1;
+      min-height: calc(100vh - 78px);
+      background: var(--crema);
+    }
+    iframe {
+      width: 100%;
+      height: calc(100vh - 78px);
+      border: 0;
+      display: block;
+      background: var(--crema);
+    }
+    .fallback {
+      padding: 14px 18px;
+      text-align: center;
+      background: #fff7ed;
+      border-top: 1px solid rgba(217,106,27,.2);
+      font-size: .95rem;
+    }
+    .fallback a { color: var(--naranja-dark); font-weight: 900; }
+    @media (max-width: 760px) {
+      #navbar {
+        height: auto;
+        min-height: 76px;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px;
+        flex-direction: column;
+      }
+      .nav-links {
+        width: 100%;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .nav-links a { font-size: .86rem; }
+      .btn-wa-nav { padding: 9px 14px; }
+      iframe { height: calc(100vh - 132px); }
+      .menu-frame-wrap { min-height: calc(100vh - 132px); }
+    }
   </style>
-  <script>
-    window.location.replace('https://byagentx.com/menu/rickipollo/');
-  </script>
 </head>
 <body>
-  <main>
-    <h1>Redirigiendo al menú de domicilio…</h1>
-    <p>Si no avanza automáticamente, abre el <a href="https://byagentx.com/menu/rickipollo/">menú oficial de Ricki Pollo</a>.</p>
+  <nav id="navbar">
+    <a href="index.html#hero" class="nav-logo">RICKI <span>POLLO</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="menu.html" aria-current="page">Menú</a></li>
+      <li><a href="index.html#nosotros">Nuestra historia</a></li>
+      <li><a href="index.html#ubicacion">Ubicación</a></li>
+      <li><a href="menu.html" class="btn-wa-nav">Ordenar en línea</a></li>
+    </ul>
+  </nav>
+
+  <main class="menu-shell">
+    <section class="menu-frame-wrap" aria-label="Menú de domicilio Ricki Pollo">
+      <iframe src="https://byagentx.com/menu/rickipollo/" title="Menú de domicilio Ricki Pollo" loading="eager"></iframe>
+    </section>
+    <div class="fallback">
+      Si el menú no carga, abre el menú oficial aquí: <a href="https://byagentx.com/menu/rickipollo/" target="_blank" rel="noopener">Ricki Pollo domicilio</a>.
+    </div>
   </main>
 </body>
 </html>
