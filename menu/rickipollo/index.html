@@ -71,7 +71,7 @@
       height: 64px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       transition: background var(--transition), box-shadow var(--transition);
       background: transparent;
     }
@@ -160,9 +160,48 @@
       z-index: 2;
       text-align: center;
       color: var(--crema);
+      max-width: 780px;
       padding: 0 20px;
-      max-width: 700px;
     }
+
+    .hero-cart-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 5;
+      background: var(--naranja);
+      border: none;
+      border-radius: 50px;
+      min-width: 58px;
+      height: 50px;
+      padding: 0 16px;
+      color: var(--blanco);
+      font-family: var(--font-body);
+      font-weight: 800;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 28px rgba(217,106,27,0.5);
+    }
+
+    #hero-cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: var(--crema);
+      color: var(--naranja);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
+      font-weight: 900;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    #hero-cart-count.show { display: flex; }
 
     .hero-eyebrow {
       font-family: var(--font-body);
@@ -309,18 +348,15 @@
       .items-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
     }
     @media (max-width: 640px) {
-      #navbar { padding: 0 14px; }
-      .nav-logo { font-size: 1.12rem; letter-spacing: 0.05em; }
-      #cart-nav-btn { padding: 8px 12px; font-size: 0; gap: 6px; color: transparent; }
-      #cart-nav-btn::before { content: '🛒'; font-size: 1rem; color: var(--blanco); }
-      #cart-count { color: var(--naranja); }
+      #navbar { display: none; }
+      .hero-cart-btn { display: flex; }
       #hero { height: 250px; }
       .hero-content { padding: 0 18px; max-width: 100%; }
       .hero-eyebrow {
         font-size: 0.62rem;
-        letter-spacing: 0.11em;
-        line-height: 1.4;
-        max-width: 320px;
+        letter-spacing: 0.08em;
+        line-height: 1.45;
+        max-width: 220px;
         margin-left: auto;
         margin-right: auto;
       }
@@ -755,8 +791,7 @@
   <!-- ============================================================
        NAVIGATION
   ============================================================ -->
-  <nav id="navbar">
-    <a href="#hero" class="nav-logo">RICKI <span>POLLO</span></a>
+  <nav id="navbar" aria-label="Carrito de pedido">
     <button id="cart-nav-btn" onclick="toggleCart()">
       🛒 Carrito
       <span id="cart-count">0</span>
@@ -769,6 +804,10 @@
   <section id="hero">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
+    <button class="hero-cart-btn" onclick="toggleCart()" aria-label="Abrir carrito">
+      🛒
+      <span id="hero-cart-count">0</span>
+    </button>
     <div class="hero-content">
       <div class="hero-eyebrow">🔥 Cholula, Puebla · Pedidos a domicilio</div>
       <h1 class="hero-title">Pollo a la <em>leña</em></h1>
@@ -1426,6 +1465,7 @@
       const emptyEl = document.getElementById('cart-empty');
       const totalEl = document.getElementById('cart-total');
       const countBadge = document.getElementById('cart-count');
+      const heroCount = document.getElementById('hero-cart-count');
       const floatCount = document.getElementById('float-cart-count');
       const waBtn = document.getElementById('wa-btn');
 
@@ -1439,6 +1479,7 @@
         emptyEl.style.display = 'block';
         totalEl.textContent = '$0';
         countBadge.classList.remove('show');
+        heroCount.classList.remove('show');
         floatCount.classList.remove('show');
         document.getElementById('float-cart').classList.remove('show');
         waBtn.href = '#';
@@ -1475,6 +1516,8 @@
       // Update counters
       countBadge.textContent = totalItems;
       countBadge.classList.add('show');
+      heroCount.textContent = totalItems;
+      heroCount.classList.add('show');
       floatCount.textContent = totalItems;
       floatCount.classList.add('show');
       document.getElementById('float-cart').classList.add('show');
