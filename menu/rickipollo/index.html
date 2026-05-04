@@ -7,7 +7,8 @@
   <meta name="description" content="Pide a domicilio el mejor pollo rostizado a la leña de Cholula. Menú completo con pollos, complementos y bebidas." />
   <meta property="og:title" content="Ricki Pollo — Menú a Domicilio" />
   <meta property="og:description" content="Pollo rostizado a la leña en Cholula, Puebla. Pide directo por WhatsApp." />
-  <meta property="og:image" content="ricki-pollo-img/hero-new.jpg" />
+  <meta property="og:image" content="https://rickipollo.mx/ricki-pollo-img/hero-new.jpg" />
+  <link rel="canonical" href="https://rickipollo.mx/menu/rickipollo/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
@@ -139,7 +140,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('ricki-pollo-img/hero-new.jpg');
+      background-image: url('../../ricki-pollo-img/hero-new.jpg');
       background-size: cover;
       background-position: center;
     }
@@ -307,8 +308,35 @@
     @media (min-width: 700px) {
       .items-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
     }
-    @media (max-width: 480px) {
-      .items-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    @media (max-width: 640px) {
+      #navbar { padding: 0 14px; }
+      .nav-logo { font-size: 1.12rem; letter-spacing: 0.05em; }
+      #cart-nav-btn { padding: 8px 12px; font-size: 0; gap: 6px; }
+      #cart-nav-btn::before { content: '🛒'; font-size: 1rem; }
+      #cart-nav-btn { color: transparent; }
+      #cart-count { color: var(--naranja); }
+      #hero { height: 250px; }
+      .hero-content { padding: 0 18px; max-width: 100%; }
+      .hero-eyebrow {
+        font-size: 0.62rem;
+        letter-spacing: 0.11em;
+        line-height: 1.4;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-title { font-size: 2.15rem; }
+      .hero-sub { font-size: 0.88rem; max-width: 310px; margin-left: auto; margin-right: auto; }
+      #cat-tabs { top: 64px; padding: 8px 10px; gap: 6px; justify-content: center; }
+      .cat-tab { padding: 8px 12px; font-size: 0.72rem; letter-spacing: 0.035em; }
+      #menu-content { padding: 0 16px; }
+      .items-grid { grid-template-columns: 1fr; gap: 16px; }
+      .items-grid .fade-in { opacity: 1; transform: none; }
+      .cat-section { padding-top: 24px; }
+      .cat-section-header { gap: 10px; align-items: flex-start; }
+      .cat-section-title { font-size: 1.35rem; line-height: 1.15; }
+      .cat-section-line { min-width: 24px; margin-top: 13px; }
+      .card-img-wrap { height: 132px; }
     }
 
     /* Card */
@@ -602,7 +630,9 @@
       gap: 8px;
       box-shadow: 0 4px 20px rgba(217,106,27,0.45);
       transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+      display: none;
     }
+    #float-cart.show { display: flex; }
     #float-cart:hover {
       background: var(--cafe);
       transform: translateY(-2px);
@@ -620,6 +650,19 @@
       justify-content: center;
     }
     #float-cart-count.show { display: flex; }
+    @media (max-width: 640px) {
+      #float-cart {
+        left: 50%;
+        right: auto;
+        bottom: max(72px, calc(env(safe-area-inset-bottom) + 72px));
+        max-width: calc(100vw - 28px);
+        padding: 11px 14px;
+        font-size: 0.82rem;
+        transform: translateX(-50%);
+      }
+      #float-cart:hover { transform: translateX(-50%) translateY(-2px); }
+      #float-cart-count { width: 20px; height: 20px; font-size: 11px; }
+    }
 
     /* ============================================================
        FOOTER
@@ -729,8 +772,8 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">🔥 Cholula, Puebla · Pedidos a domicilio</div>
-      <h1 class="hero-title">Ricki <em>Pollo</em></h1>
-      <p class="hero-sub">Rostizados a la leña. Pide tu pedido y lo llevamos a tu puerta.</p>
+      <h1 class="hero-title">Pollo a la <em>leña</em></h1>
+      <p class="hero-sub">Arma tu pedido desde el menú y envíalo por WhatsApp en un clic.</p>
       <a href="#pollos" class="hero-cta" onclick="scrollToSection('pollos', event)">Ver Menú ↓</a>
     </div>
   </section>
@@ -739,9 +782,9 @@
        CATEGORY TABS
   ============================================================ -->
   <div id="cat-tabs">
-    <button class="cat-tab active" data-target="pollos">🍗 POLLOS</button>
-    <button class="cat-tab" data-target="complementos">🍝 COMPLEMENTOS</button>
-    <button class="cat-tab" data-target="bebidas">🥤 BEBIDAS</button>
+    <button class="cat-tab active" data-target="pollos">POLLOS</button>
+    <button class="cat-tab" data-target="complementos">EXTRAS</button>
+    <button class="cat-tab" data-target="bebidas">BEBIDAS</button>
   </div>
 
   <!-- ============================================================
@@ -1358,6 +1401,8 @@
 
     // ── Cart state ───────────────────────────────────────────────
     const cart = {};
+    // Punto único para ligar el flujo al bot de WhatsApp en la siguiente etapa.
+    const ORDER_WHATSAPP_NUMBER = '5212711328513';
 
     function addToCart(name, price) {
       if (cart[name]) {
@@ -1396,6 +1441,7 @@
         totalEl.textContent = '$0';
         countBadge.classList.remove('show');
         floatCount.classList.remove('show');
+        document.getElementById('float-cart').classList.remove('show');
         waBtn.href = '#';
         return;
       }
@@ -1432,6 +1478,7 @@
       countBadge.classList.add('show');
       floatCount.textContent = totalItems;
       floatCount.classList.add('show');
+      document.getElementById('float-cart').classList.add('show');
 
       // Build WhatsApp message
       let msg = '🍗 *PEDIDO RICKI POLLO*\n\n';
@@ -1442,7 +1489,7 @@
       msg += `\n*Total: $${total}*`;
       if (ref) msg += `\n\nRef: ${ref}`;
 
-      waBtn.href = 'https://wa.me/5212711328513?text=' + encodeURIComponent(msg);
+      waBtn.href = `https://wa.me/${ORDER_WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     }
 
     // ── Cart drawer ──────────────────────────────────────────────
