@@ -1460,69 +1460,32 @@
       renderCart();
     }
 
-    function renderCart() {
-      const itemsEl = document.getElementById('cart-items');
-      const emptyEl = document.getElementById('cart-empty');
-      const totalEl = document.getElementById('cart-total');
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function updateCartBadges(totalItems) {
       const countBadge = document.getElementById('cart-count');
       const heroCount = document.getElementById('hero-cart-count');
       const floatCount = document.getElementById('float-cart-count');
-      const waBtn = document.getElementById('wa-btn');
+      const floatCart = document.getElementById('float-cart');
+      const badges = [countBadge, heroCount, floatCount].filter(Boolean);
 
-      const keys = Object.keys(cart);
-      let total = 0;
-      let totalItems = 0;
-
-      if (keys.length === 0) {
-        itemsEl.innerHTML = '';
-        itemsEl.appendChild(emptyEl);
-        emptyEl.style.display = 'block';
-        totalEl.textContent = '$0';
-        countBadge.classList.remove('show');
-        heroCount.classList.remove('show');
-        floatCount.classList.remove('show');
-        document.getElementById('float-cart').classList.remove('show');
-        waBtn.href = '#';
-        return;
-      }
-
-      emptyEl.style.display = 'none';
-
-      // Build items HTML
-      let html = '';
-      keys.forEach(name => {
-        const { price, qty } = cart[name];
-        const sub = price * qty;
-        total += sub;
-        totalItems += qty;
-        html += `
-          <div class="cart-item">
-            <div class="ci-info">
-              <div class="ci-name">${name}</div>
-              <div class="ci-unit">$${price} c/u</div>
-            </div>
-            <div class="qty-ctrl">
-              <button class="qty-btn" onclick="changeQty('${name.replace(/'/g,"\\'")}', -1)">−</button>
-              <span class="qty-num">${qty}</span>
-              <button class="qty-btn" onclick="changeQty('${name.replace(/'/g,"\\'")}', 1)">+</button>
-            </div>
-            <div class="ci-subtotal">$${sub}</div>
-          </div>`;
+      badges.forEach(badge => {
+        badge.textContent = totalItems;
+        badge.classList.toggle('show', totalItems > 0);
       });
+      if (floatCart) floatCart.classList.toggle('show', totalItems > 0);
+    }
 
-      itemsEl.innerHTML = html;
-      totalEl.textContent = '$' + total;
+    function buildWhatsAppHref(keys, total) {
+      if (!keys.length) return '#';
 
-      // Update counters
-      countBadge.textContent = totalItems;
-      countBadge.classList.add('show');
-      heroCount.textContent = totalItems;
-      heroCount.classList.add('show');
-      floatCount.textContent = totalItems;
-      floatCount.classList.add('show');
-      document.getElementById('float-cart').classList.add('show');
-
-      // Build WhatsApp message
       let msg = '🍗 *PEDIDO RICKI POLLO*\n\n';
       keys.forEach(name => {
         const { price, qty } = cart[name];
@@ -1531,8 +1494,64 @@
       msg += `\n*Total: $${total}*`;
       if (ref) msg += `\n\nRef: ${ref}`;
 
-      waBtn.href = `https://wa.me/${ORDER_WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      return `https://wa.me/${ORDER_WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     }
+
+    function renderCart() {
+      const itemsEl = document.getElementById('cart-items');
+      const totalEl = document.getElementById('cart-total');
+      const waBtn = document.getElementById('wa-btn');
+
+      const keys = Object.keys(cart);
+      let total = 0;
+      let totalItems = 0;
+
+      if (keys.length === 0) {
+        itemsEl.innerHTML = `
+          <div class="cart-empty" id="cart-empty">
+            <div class="cart-empty-icon">🍗</div>
+            <p>Tu carrito está vacío.<br>¡Agrega algo delicioso!</p>
+          </div>`;
+        totalEl.textContent = '$0';
+        updateCartBadges(0);
+        waBtn.href = '#';
+        return;
+      }
+
+      itemsEl.innerHTML = keys.map(name => {
+        const { price, qty } = cart[name];
+        const sub = price * qty;
+        total += sub;
+        totalItems += qty;
+
+        return `
+          <div class="cart-item" data-cart-item="${escapeHtml(name)}">
+            <div class="ci-info">
+              <div class="ci-name">${escapeHtml(name)}</div>
+              <div class="ci-unit">$${price} c/u</div>
+            </div>
+            <div class="qty-ctrl">
+              <button class="qty-btn" type="button" data-cart-action="decrease" data-cart-name="${escapeHtml(name)}" aria-label="Quitar uno de ${escapeHtml(name)}">−</button>
+              <span class="qty-num">${qty}</span>
+              <button class="qty-btn" type="button" data-cart-action="increase" data-cart-name="${escapeHtml(name)}" aria-label="Agregar otro ${escapeHtml(name)}">+</button>
+            </div>
+            <div class="ci-subtotal">$${sub}</div>
+          </div>`;
+      }).join('');
+
+      totalEl.textContent = '$' + total;
+      updateCartBadges(totalItems);
+      waBtn.href = buildWhatsAppHref(keys, total);
+    }
+
+    document.getElementById('cart-items').addEventListener('click', (event) => {
+      const btn = event.target.closest('[data-cart-action]');
+      if (!btn) return;
+
+      const name = btn.dataset.cartName;
+      const delta = btn.dataset.cartAction === 'increase' ? 1 : -1;
+      changeQty(name, delta);
+    });
 
     // ── Cart drawer ──────────────────────────────────────────────
     function openCart() {
