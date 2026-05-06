@@ -1024,6 +1024,263 @@
       margin: 0 auto 16px;
       opacity: 0.6;
     }
+
+    /* ============================================================
+       BLOQUE HISTORIA EN ACOMPAÑANTES
+    ============================================================ */
+    .heritage-card {
+      position: relative;
+      margin: 0 auto;
+      padding: clamp(28px, 5vw, 56px);
+      background:
+        radial-gradient(circle at 12% 22%, rgba(217,106,27,0.22) 0 12%, transparent 13%),
+        linear-gradient(135deg, #151515 0%, #0f0f0f 52%, #1b1b1b 100%);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.30);
+      display: grid;
+      grid-template-columns: minmax(300px, 0.95fr) minmax(340px, 1.05fr);
+      gap: clamp(34px, 6vw, 72px);
+      border: 1px solid rgba(217, 106, 27, 0.18);
+      color: var(--crema);
+    }
+
+    .heritage-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.4;
+      mix-blend-mode: screen;
+    }
+
+    .heritage-collage,
+    .heritage-content { position: relative; z-index: 1; }
+
+    .heritage-collage {
+      min-height: clamp(420px, 46vw, 560px);
+      border-radius: 18px;
+      background:
+        linear-gradient(160deg, rgba(244,240,232,0.08), rgba(244,240,232,0.02)),
+        rgba(255,255,255,0.025);
+      box-shadow: inset 0 0 0 1px rgba(244,240,232,0.08);
+      overflow: hidden;
+    }
+
+    .heritage-collage::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      left: -58px;
+      top: 52px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(217,106,27,0.82), rgba(180,83,42,0.52) 58%, transparent 60%);
+      filter: saturate(0.9);
+    }
+
+    .heritage-photo-main,
+    .heritage-photo-fire {
+      position: absolute;
+      display: block;
+      object-fit: cover;
+      box-shadow: 0 18px 48px rgba(0,0,0,0.42);
+      filter: saturate(0.82) contrast(1.08);
+    }
+
+    .heritage-photo-main {
+      width: 55%;
+      min-width: 230px;
+      aspect-ratio: 4 / 5;
+      left: 10%;
+      top: 6%;
+      border-radius: 16px;
+      filter: grayscale(1) sepia(0.24) contrast(1.05);
+    }
+
+    .heritage-photo-fire {
+      width: 52%;
+      aspect-ratio: 1 / 1;
+      right: 5%;
+      bottom: 10%;
+      border: 10px solid rgba(244,240,232,0.92);
+      transform: rotate(2deg);
+    }
+
+    .heritage-tape {
+      position: absolute;
+      right: 15%;
+      top: 39%;
+      width: 140px;
+      height: 34px;
+      background: rgba(195,157,94,0.82);
+      transform: rotate(2deg);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.24);
+      z-index: 3;
+      opacity: 0.92;
+    }
+
+    .heritage-note {
+      position: absolute;
+      left: 9%;
+      bottom: 24%;
+      max-width: 178px;
+      padding: 16px 18px;
+      background: #d8c7ad;
+      color: #2b241f;
+      font-family: var(--font-title);
+      font-size: clamp(1rem, 1.8vw, 1.28rem);
+      line-height: 1.18;
+      transform: rotate(-4deg);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+      z-index: 4;
+    }
+
+    .heritage-seal {
+      position: absolute;
+      left: 14%;
+      bottom: 7%;
+      width: 108px;
+      height: 108px;
+      border: 2px solid rgba(217,106,27,0.68);
+      border-radius: 50%;
+      color: var(--naranja);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(20,20,20,0.54);
+      z-index: 4;
+    }
+
+    .heritage-seal strong {
+      display: block;
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+      color: var(--crema);
+      margin: 2px 0;
+    }
+
+    .heritage-kicker {
+      color: var(--naranja);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.76rem;
+      margin-bottom: 18px;
+    }
+
+    .heritage-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.75rem, 5.3vw, 4.95rem);
+      line-height: 0.9;
+      color: var(--crema);
+      margin-bottom: 30px;
+      letter-spacing: -0.03em;
+    }
+
+    .heritage-title em {
+      color: var(--naranja);
+      font-style: italic;
+    }
+
+    .heritage-copy {
+      color: rgba(244,240,232,0.78);
+      font-size: clamp(1rem, 1.35vw, 1.12rem);
+      line-height: 1.78;
+      display: grid;
+      gap: 18px;
+      margin-bottom: 28px;
+      max-width: 620px;
+    }
+
+    .heritage-line {
+      width: min(100%, 560px);
+      height: 1px;
+      background: rgba(244,240,232,0.16);
+      margin: 28px 0 22px;
+    }
+
+    .heritage-quote {
+      color: var(--naranja);
+      font-family: var(--font-title);
+      font-size: clamp(1.35rem, 2vw, 1.8rem);
+      font-style: italic;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-top: 4px;
+    }
+
+    .heritage-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+      max-width: 560px;
+    }
+
+    .heritage-point {
+      padding: 0 26px;
+      border-right: 1px solid rgba(244,240,232,0.14);
+      text-align: center;
+    }
+
+    .heritage-point:first-child { padding-left: 0; }
+    .heritage-point:last-child { border-right: 0; padding-right: 0; }
+
+    .heritage-icon {
+      color: var(--naranja);
+      font-size: 1.8rem;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .heritage-point strong {
+      display: block;
+      color: rgba(244,240,232,0.86);
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .heritage-point span {
+      display: block;
+      color: var(--naranja);
+      font-family: var(--font-title);
+      font-size: clamp(1.35rem, 2.25vw, 2rem);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    @media (max-width: 980px) {
+      .heritage-card { grid-template-columns: 1fr; }
+      .heritage-collage { min-height: 520px; }
+    }
+
+    @media (max-width: 640px) {
+      .heritage-card {
+        padding: 22px;
+        border-radius: 22px;
+        gap: 30px;
+      }
+      .heritage-collage { min-height: 430px; }
+      .heritage-photo-main { left: 6%; width: 62%; min-width: 0; }
+      .heritage-photo-fire { width: 58%; right: 2%; bottom: 12%; border-width: 7px; }
+      .heritage-note { left: 6%; bottom: 25%; max-width: 150px; padding: 13px 14px; }
+      .heritage-seal { width: 88px; height: 88px; left: 10%; font-size: 0.48rem; }
+      .heritage-tape { right: 10%; top: 40%; width: 110px; }
+      .heritage-points { grid-template-columns: 1fr; gap: 18px; }
+      .heritage-point { border-right: 0; padding: 0; text-align: left; display: grid; grid-template-columns: 42px 1fr; column-gap: 12px; align-items: center; }
+      .heritage-icon { margin-bottom: 0; grid-row: span 2; }
+    }
+
   </style>
 </head>
 <body>
@@ -1894,70 +2151,41 @@
   ============================================================ -->
   <section id="guarniciones">
     <div class="container">
-      <div class="section-head centered">
-        <div class="section-label fade-in">Los acompañantes</div>
-        <h2 class="section-title fade-in fade-in-delay-1">Guarniciones & Extras</h2>
-        <p class="section-subtitle fade-in fade-in-delay-2">
-          Elige las que más te gusten. Todas preparadas con el mismo amor y cuidado
-          que ponemos en nuestro pollo.
-        </p>
-      </div>
-
-      <div class="garnish-grid">
-        <div class="garnish-card fade-in">
-          <div class="garnish-emoji">🥔</div>
-          <div class="garnish-name">Papas Cambray</div>
+      <div class="heritage-card fade-in">
+        <div class="heritage-collage" aria-label="Archivo familiar y horno de leña de Ricki Pollo">
+          <img class="heritage-photo-main" src="img/historia-dona-carmen-archivo.png?v=d7d28e3" alt="Retrato de Doña Carmen Covarrubias Robles, inspiración familiar de Ricki Pollo" onerror="this.style.display='none'" />
+          <img class="heritage-photo-fire" src="img/historia-lena-rostizado.png?v=d7d28e3" alt="Pollo rostizado a la leña en horno tradicional" onerror="this.style.display='none'" />
+          <div class="heritage-tape" aria-hidden="true"></div>
+          <div class="heritage-note">1946<br />el inicio de<br />nuestra tradición.</div>
+          <div class="heritage-seal">Hecho en familia<strong>Desde<br />1946</strong>Tradición que perdura</div>
         </div>
-        <div class="garnish-card fade-in fade-in-delay-1">
-          <div class="garnish-emoji">🍝</div>
-          <div class="garnish-name">Espagueti Rojo</div>
-        </div>
-        <div class="garnish-card fade-in fade-in-delay-2">
-          <div class="garnish-emoji">🍝</div>
-          <div class="garnish-name">Espagueti Blanco</div>
-        </div>
-        <div class="garnish-card fade-in fade-in-delay-3">
-          <div class="garnish-emoji">🌶️</div>
-          <div class="garnish-name">Papas Adobadas</div>
-        </div>
-        <div class="garnish-card fade-in">
-          <div class="garnish-emoji">🍲</div>
-          <div class="garnish-name">Sopa de Codito</div>
-        </div>
-        <div class="garnish-card fade-in fade-in-delay-1">
-          <div class="garnish-emoji">🥗</div>
-          <div class="garnish-name">Ensalada de Col</div>
-        </div>
-        <div class="garnish-card fade-in fade-in-delay-2">
-          <div class="garnish-emoji">🍚</div>
-          <div class="garnish-name">Arroz</div>
-        </div>
-        <div class="garnish-card fade-in fade-in-delay-3">
-          <div class="garnish-emoji">🍏</div>
-          <div class="garnish-name">Ensalada de Manzana</div>
-        </div>
-      </div>
-
-      <div class="extras-row">
-        <div class="extras-group fade-in">
-          <div class="extras-group-title">🌿 Salsas</div>
-          <ul class="extras-list">
-            <li>Verde</li>
-            <li>Pico de Gallo</li>
-            <li>Chiles en Vinagre</li>
-          </ul>
-        </div>
-        <div class="extras-group fade-in fade-in-delay-1">
-          <div class="extras-group-title">🍮 Postres</div>
-          <ul class="extras-list">
-            <li>Flan Napolitano</li>
-          </ul>
-        </div>
-        <div class="extras-group fade-in fade-in-delay-2">
-          <div class="extras-group-title">🥤 Bebidas</div>
-          <ul class="extras-list">
-            <li>Refresco Familiar 2L</li>
-          </ul>
+        <div class="heritage-content">
+          <div class="heritage-kicker">Nuestra historia</div>
+          <h2 class="heritage-title">Tradición con<br /><em>raíces reales</em></h2>
+          <div class="heritage-copy">
+            <p>Detrás de Ricki Pollo hay una historia de familia. Una historia que nos conecta con Doña Carmen Covarrubias Robles, nuestra bisabuela, y con una tradición de pollo rostizado a la leña que comenzó en 1946.</p>
+            <p>Más que una receta, heredamos una forma de hacer las cosas: cocinar con paciencia, cuidar cada detalle y servir con sabor casero.</p>
+            <p>Hoy transformamos esa inspiración en una propuesta propia, con pollos rostizados a la leña hechos para compartir en familia.</p>
+          </div>
+          <p class="heritage-quote">Una tradición que sigue viva en cada pollo.</p>
+          <div class="heritage-line" aria-hidden="true"></div>
+          <div class="heritage-points">
+            <div class="heritage-point">
+              <div class="heritage-icon">▣</div>
+              <strong>Origen</strong>
+              <span>1946</span>
+            </div>
+            <div class="heritage-point">
+              <div class="heritage-icon">♧</div>
+              <strong>Herencia</strong>
+              <span>familiar</span>
+            </div>
+            <div class="heritage-point">
+              <div class="heritage-icon">♨</div>
+              <strong>Sazón</strong>
+              <span>a la leña</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
