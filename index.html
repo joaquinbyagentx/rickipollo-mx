@@ -955,8 +955,8 @@
     ============================================================ */
     .wa-fab {
       position: fixed;
-      bottom: 28px;
-      right: 28px;
+      bottom: max(34px, calc(env(safe-area-inset-bottom, 0px) + 24px));
+      right: max(28px, calc(env(safe-area-inset-right, 0px) + 24px));
       z-index: 999;
       width: 60px; height: 60px;
       background: #25d366;
@@ -1530,7 +1530,7 @@
           <img class="heritage-photo-fire" src="img/historia-horno-lena-premium.jpg?v=historia-polish" alt="Horno de leña con pollo rostizado, tradición e inspiración de Ricki Pollo" onerror="this.style.display='none'" />
           <div class="heritage-tape" aria-hidden="true"></div>
           <div class="heritage-note">1946<br />el inicio de<br />nuestra tradición.</div>
-          <div class="heritage-seal">Hecho en familia<strong>Desde<br />1946</strong>Tradición que perdura</div>
+          <div class="heritage-seal">Hecho en familia<strong>Desde<br />1946</strong>Tradición<br />que perdura</div>
         </div>
         <div class="heritage-content">
           <div class="heritage-kicker">Nuestra historia</div>
