@@ -71,7 +71,8 @@
       height: 64px;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
+      gap: 16px;
       transition: background var(--transition), box-shadow var(--transition);
       background: transparent;
     }
@@ -81,23 +82,19 @@
     }
 
     .nav-logo {
-      font-family: var(--font-title);
-      font-size: 1.4rem;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      color: var(--crema);
-      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      min-height: 64px;
     }
-    .nav-logo span { color: var(--naranja); }
-    .menu-brand-logo {
-      width: clamp(145px, 24vw, 230px);
+    .nav-logo-img {
+      display: block;
+      width: clamp(78px, 9vw, 108px);
+      max-height: 58px;
       height: auto;
-      margin: 0 auto 14px;
-      filter: drop-shadow(0 14px 30px rgba(0,0,0,0.4));
-      opacity: 0;
-      animation: heroFadeUp 0.9s ease 0.2s forwards;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,0.34));
     }
-
     /* Cart button in nav */
     #cart-nav-btn {
       background: var(--naranja);
@@ -356,8 +353,16 @@
       .items-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
     }
     @media (max-width: 640px) {
-      #navbar { display: none; }
-      .hero-cart-btn { display: flex; }
+      #navbar {
+        display: flex;
+        height: 62px;
+        padding: 0 14px;
+        pointer-events: none;
+      }
+      #navbar .nav-logo { pointer-events: auto; min-height: 62px; }
+      #navbar .nav-logo-img { width: 82px; max-height: 58px; }
+      #cart-nav-btn { display: none; }
+      .hero-cart-btn { display: flex; top: 14px; right: 14px; }
       #hero { height: 250px; }
       .hero-content { padding: 0 18px; max-width: 100%; }
       .hero-eyebrow {
@@ -799,7 +804,8 @@
   <!-- ============================================================
        NAVIGATION
   ============================================================ -->
-  <nav id="navbar" aria-label="Carrito de pedido">
+  <nav id="navbar" aria-label="Navegación y carrito de pedido">
+    <a href="../../" class="nav-logo" aria-label="Ricki Pollo inicio"><img class="nav-logo-img" src="../../ricki-pollo-img/logo-ricki-pollo-primary.png" alt="Ricki Pollo Rostizados a la Leña" /></a>
     <button id="cart-nav-btn" onclick="toggleCart()">
       🛒 Carrito
       <span id="cart-count">0</span>
@@ -817,7 +823,6 @@
       <span id="hero-cart-count">0</span>
     </button>
     <div class="hero-content">
-      <img class="menu-brand-logo" src="../../ricki-pollo-img/logo-ricki-pollo-primary.png" alt="Ricki Pollo Rostizados a la Leña" />
       <div class="hero-eyebrow">🔥 Puebla · Zavaleta · Pedidos a domicilio</div>
       <h1 class="hero-title">Pollo a la <em>leña</em></h1>
       <p class="hero-sub">3 generaciones de historia y calidad. Arma tu pedido desde el menú y envíalo por WhatsApp en un clic.</p>
